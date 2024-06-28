@@ -1,0 +1,35 @@
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="com.ewallet.lib.common.MaskingPatternLayout">
+                <maskPattern>\"SSN\"\s*:\s*\"(.*?)\"</maskPattern> <!-- SSN JSON pattern -->
+                <maskPattern>\"legalIdType\"\s*:\s*\"(.*?)\"</maskPattern> <!-- Address JSON pattern -->
+                <maskPattern>legalIdType='(.*?)'</maskPattern> <!-- Address JSON pattern -->
+                <maskPattern>(\d+\.\d+\.\d+\.\d+)</maskPattern> <!-- Ip address IPv4 pattern -->
+                <maskPattern>(\w+@\w+\.\w+)</maskPattern> <!-- Email pattern -->
+                <hidePattern>\"fileContent\"\s*:\s*\{(.*?)\}</hidePattern>
+                <Pattern>
+                    %d{ISO8601} %cyan(${HOSTNAME}) %highlight(%-5level) %msg - %yellow([%C.%M\(%L\)]) %n%throwable
+                </Pattern> <!-- %yellow(%logger) -->
+            </layout>
+        </encoder>
+    </appender>
+
+    <appender name="async" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="CONSOLE"/>
+        <includeCallerData>true</includeCallerData>
+    </appender>
+
+    <logger name="io.netty.util.internal.logging" level="OFF"/>
+    <logger name="io.lettuce.core.protocol.ReconnectionHandler" level="OFF" />
+
+    <logger name="com.ewallet" level="debug" additivity="false">
+        <appender-ref ref="async"/>
+    </logger>
+
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
+    <root level="info">
+        <appender-ref ref="async"/>
+    </root>
+
+</configuration>

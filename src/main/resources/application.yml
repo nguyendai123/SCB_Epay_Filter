@@ -1,0 +1,23 @@
+### Common-setting-start ####
+server:
+  port: 18080
+  servlet:
+    context-path: /PreprodCSBUAT/ewallet/
+
+spring:
+  application:
+    name: service
+hsm:
+  timeout: 500
+  timerStartAfter: 500
+  inactive: 500
+  reconnectPeriod: 500
+  servers: 172.20.15.132:111
+
+
+
+
+
+grpc:
+  server:
+    port: -1 # disable grpc-server
