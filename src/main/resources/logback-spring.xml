@@ -1,7 +1,7 @@
 <configuration>
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-            <layout class="com.ewallet.lib.common.MaskingPatternLayout">
+            <layout class="com.stb.epay.lib.common.MaskingPatternLayout">
                 <maskPattern>\"SSN\"\s*:\s*\"(.*?)\"</maskPattern> <!-- SSN JSON pattern -->
                 <maskPattern>\"legalIdType\"\s*:\s*\"(.*?)\"</maskPattern> <!-- Address JSON pattern -->
                 <maskPattern>legalIdType='(.*?)'</maskPattern> <!-- Address JSON pattern -->
